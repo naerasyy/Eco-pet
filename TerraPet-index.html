@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f7f3e8" />
+  <title>Terra.Pet — Pixel Eco-Pet Adventure</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Silkscreen:wght@400;700&display=swap');
+:root{--ink:#263b32;--green:#347c57;--paper:#fffef8;--muted:#778579;--line:#dce3d5;--yellow:#f5d66e;--pixel:'Silkscreen',monospace;--body:'DM Sans',sans-serif}
+*{box-sizing:border-box}body{margin:0;background:#f7f3e8;color:var(--ink);font-family:var(--body);background-image:radial-gradient(#dfe5d6 1px,transparent 1px);background-size:18px 18px}.app-shell{max-width:1120px;margin:auto;padding:24px 34px 18px}.topbar{height:54px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--ink)}.brand{font:700 17px var(--pixel);color:var(--ink);text-decoration:none;letter-spacing:-1px}.brand-icon{display:inline-grid;place-items:center;width:30px;height:30px;margin-right:8px;background:#d9e8c7;border:2px solid var(--ink);box-shadow:3px 3px var(--ink);font:20px var(--body)}.tag,.eyebrow{font:700 9px var(--pixel);letter-spacing:.4px;color:var(--green)}.intro{display:flex;justify-content:space-between;align-items:center;padding:34px 0 25px}.intro h1{font:700 clamp(23px,3vw,35px)/1.45 var(--pixel);margin:10px 0}.intro h1 span{color:var(--green)}.subtext{font-size:13px;color:#647469}.level-chip{padding:12px 16px;background:#fff2bf;border:2px solid var(--ink);box-shadow:4px 4px var(--ink);font:10px var(--pixel)}.level-chip strong{font-size:16px;margin-left:8px}.game-layout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(270px,.85fr);gap:20px}.pet-panel,.quest-card,.score-card,.tip-card{background:var(--paper);border:2px solid var(--ink);box-shadow:5px 5px 0 #d4dbd0}.pet-panel{padding:20px}.panel-heading{display:flex;justify-content:space-between;align-items:center}.panel-heading h2,.quest-card h2{font:700 14px var(--pixel);margin:7px 0 14px}.online-dot{font:700 8px var(--pixel);color:var(--green)}.habitat{height:270px;position:relative;overflow:hidden;border:2px solid var(--ink);background:linear-gradient(#b8ded2 0 63%,#91bd77 63%)}.sun{position:absolute;width:48px;height:48px;right:11%;top:12%;background:#ffdf79;box-shadow:0 0 0 8px #ffdf793b}.cloud{position:absolute;width:65px;height:15px;background:#f8fff0;top:22%;left:13%;box-shadow:10px -10px 0 -2px #f8fff0,25px 0 #f8fff0}.cloud-two{left:auto;right:30%;top:37%;transform:scale(.65)}.hill{position:absolute;bottom:-65px;width:75%;height:150px;border-radius:50% 50% 0 0}.hill-back{left:-15%;background:#78a96d}.hill-front{right:-18%;background:#659b5f;bottom:-85px}.pet-image{position:absolute;width:190px;height:160px;object-fit:contain;left:50%;top:42%;transform:translate(-50%,-50%);image-rendering:pixelated;filter:drop-shadow(0 8px 0 #34513b30);animation:bob 2.4s ease-in-out infinite}.habitat-label{position:absolute;bottom:12px;left:12px;padding:7px 9px;background:#fffdf0;border:2px solid var(--ink);font:8px var(--pixel)}@keyframes bob{50%{transform:translate(-50%,-54%)}}.speech{padding:12px 14px;margin:14px 0;background:#edf4e5;border-left:4px solid var(--green);font-size:12px}.pet-stats{display:grid;grid-template-columns:1fr 1fr;gap:18px}.stat-label{display:flex;align-items:center;gap:6px;font-size:11px;color:#627266}.stat-label span{color:var(--green);font-size:16px}.stat-label b{margin-left:auto;color:var(--ink)}.meter{height:10px;margin-top:8px;background:#e8e9dc;border:1px solid #cbd5c5}.meter i{display:block;height:100%;background:#e8b95d;transition:width .25s}.meter.happy i{background:#78ad78}.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:18px}.action-btn{border:2px solid var(--ink);padding:12px 7px;background:#f8f4df;box-shadow:3px 3px var(--ink);font:700 9px var(--pixel);color:var(--ink);cursor:pointer;transition:.15s}.action-btn span{display:block;font:20px var(--body);margin-bottom:6px}.action-btn:hover{transform:translate(2px,2px);box-shadow:1px 1px var(--ink)}.feed{background:#e4efcf}.play{background:#f9e6b7}.clean{background:#dcefed}.side-column{display:flex;flex-direction:column;gap:15px}.score-card{padding:18px;background:#e4efd9}.score{display:flex;align-items:center;gap:10px;margin:12px 0 3px}.score span{font-size:26px;color:#b78c28}.score strong{font:700 28px var(--pixel)}.score-note{font-size:11px;color:#657468;margin:8px 0 0}.quest-card{padding:18px}.quest-card h2{margin:9px 0 14px}.quest{display:flex;align-items:center;gap:10px;padding:11px 0;border-top:1px solid var(--line)}.quest-icon{width:34px;height:34px;display:grid;place-items:center;background:#e7efdc;border:1px solid #b9c9ae;font-size:17px}.quest div{flex:1}.quest b,.quest small{display:block}.quest b{font-size:11px}.quest small{font-size:9px;color:var(--muted);margin-top:4px;line-height:1.4}.quest>strong{font:10px var(--pixel);color:var(--green)}.quest-hint{font-size:10px;color:var(--muted);line-height:1.5;margin-bottom:0}.tip-card{display:flex;gap:12px;align-items:flex-start;padding:14px;background:#fff4cb}.tip-card>span{font-size:24px}.tip-card b{font:10px var(--pixel)}.tip-card p{font-size:10px;line-height:1.5;margin:6px 0 0;color:#667466}footer{text-align:center;padding:24px 0 5px;font:8px var(--pixel);color:#7b897c}footer span{padding:0 8px;color:var(--green)}
+@media(max-width:760px){.app-shell{padding:15px}.tag{font-size:7px}.intro{padding:26px 0 20px}.game-layout{grid-template-columns:1fr}.habitat{height:250px}.side-column{display:grid;grid-template-columns:1fr}.actions{gap:7px}.action-btn{font-size:8px}.pet-panel{padding:14px}.pet-stats{gap:10px}}
+
+  </style>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#"> <span class="brand-icon">✿</span> TERRA.PET</a>
+      <span class="tag">PIXEL ECO-PET ADVENTURE</span>
+    </header>
+
+    <section class="intro">
+      <div>
+        <p class="eyebrow">HABITAT · KAMPUNG LUMUT</p>
+        <h1>Petualangan kecil.<br><span>Dampak yang besar.</span></h1>
+        <p class="subtext">Rawat pet-mu, lakukan aksi ramah lingkungan, dan kumpulkan Eco Poin!</p>
+      </div>
+      <div class="level-chip">LEVEL <strong id="level">01</strong></div>
+    </section>
+
+    <section class="game-layout">
+      <article class="pet-panel">
+        <div class="panel-heading"><div><p class="eyebrow">TEMAN PETUALANGANMU</p><h2 id="pet-name">Moss si Kura-kura</h2></div><span class="online-dot">● ONLINE</span></div>
+        <div class="habitat" id="habitat">
+          <div class="sun"></div><div class="cloud cloud-one"></div><div class="cloud cloud-two"></div>
+          <div class="hill hill-back"></div><div class="hill hill-front"></div>
+          <img id="pet-image" class="pet-image" src="assets/turtle.svg" alt="Karakter pixel art kura-kura Moss" />
+          <div class="habitat-label">KOLAM LUMUT</div>
+        </div>
+        <div class="speech" id="speech">Halo! Senang bertemu denganmu. Ayo jaga bumi bersama!</div>
+        <div class="pet-stats">
+          <div class="stat"><div class="stat-label"><span>♡</span> Rasa lapar <b id="hunger-value">35%</b></div><div class="meter"><i id="hunger-meter" style="width:35%"></i></div></div>
+          <div class="stat"><div class="stat-label"><span>✦</span> Kebahagiaan <b id="happy-value">80%</b></div><div class="meter happy"><i id="happy-meter" style="width:80%"></i></div></div>
+        </div>
+        <div class="actions">
+          <button class="action-btn feed" id="feed"> <span>🥬</span> Beri makan</button>
+          <button class="action-btn play" id="play"> <span>✦</span> Ajak bermain</button>
+          <button class="action-btn clean" id="clean"> <span>♻</span> Bersihkan habitat</button>
+        </div>
+      </article>
+
+      <aside class="side-column">
+        <section class="score-card"><p class="eyebrow">TOTAL ECO POIN</p><div class="score"><span>✦</span><strong id="score">120</strong></div><p class="score-note">Poin dari aksi baikmu untuk bumi.</p></section>
+        <section class="quest-card"><p class="eyebrow">DAILY ECO QUEST</p><h2>Aksi hari ini</h2>
+          <div class="quest"><span class="quest-icon">♻</span><div><b>Pilah sampah</b><small>Pisahkan sampah organik dan anorganik.</small></div><strong>+20</strong></div>
+          <div class="quest"><span class="quest-icon">💧</span><div><b>Hemat air</b><small>Gunakan air secukupnya hari ini.</small></div><strong>+15</strong></div>
+          <div class="quest"><span class="quest-icon">🌱</span><div><b>Rawat tanaman</b><small>Siram atau tanam satu tanaman.</small></div><strong>+25</strong></div>
+          <p class="quest-hint">Selesaikan quest untuk mendapatkan poin tambahan.</p>
+        </section>
+        <section class="tip-card"><span>🌿</span><div><b>Eco fact</b><p>Membawa botol minum sendiri membantu mengurangi sampah plastik sekali pakai.</p></div></section>
+      </aside>
+    </section>
+    <footer>TERra.PET <span>·</span> Rawat pet-mu, rawat bumi kita.</footer>
+  </main>
+  <script>
+let hunger=35, happiness=80, score=120, level=1;
+const $=id=>document.getElementById(id);
+function update(){ $('hunger-value').textContent=hunger+'%';$('happy-value').textContent=happiness+'%';$('hunger-meter').style.width=hunger+'%';$('happy-meter').style.width=happiness+'%';$('score').textContent=score;$('level').textContent=String(level).padStart(2,'0'); }
+function message(text){$('speech').textContent=text;}
+$('feed').addEventListener('click',()=>{if(hunger<=0){message('Aku sudah kenyang! Terima kasih sudah merawatku.');return;}hunger=Math.max(0,hunger-25);happiness=Math.min(100,happiness+5);score+=5;message('Nyam! Terima kasih. Makanan sehat membuatku bersemangat!');update();});
+$('play').addEventListener('click',()=>{happiness=Math.min(100,happiness+15);hunger=Math.min(100,hunger+8);score+=10;message('Yeay, seru sekali bermain bersamamu! Ayo lanjutkan petualangan.');update();});
+$('clean').addEventListener('click',()=>{happiness=Math.min(100,happiness+10);score+=15;message('Habitatku jadi bersih dan nyaman. Bumi juga perlu kita jaga!');update();});
+
+  </script>
+</body>
+</html>
