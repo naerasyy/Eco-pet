@@ -1,0 +1,36 @@
+<head> 
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+</head>
+<div id="bottleModal" class="bottle-modal">
+
+  <div class="bottle-card">
+    <h3>🧴 Bring Your Own Bottle!</h3>
+
+    <p>Foto botol minum yang kamu bawa hari ini.</p>
+
+    <video id="camera" autoplay playsinline></video>
+
+    <canvas id="canvas" hidden></canvas>
+
+    <img id="preview" hidden alt="Foto botol minum">
+
+    <button id="captureBtn">
+      📸 Ambil Foto
+    </button>
+
+    <p id="status"></p>
+
+    <button id="confirmYes" hidden>
+      Ya
+    </button>
+
+    <button id="confirmNo" hidden>
+      Tidak
+    </button>
+
+    <button id="closeModal">
+      Tutup
+    </button>
+  </div>
+</div>
