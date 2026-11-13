@@ -263,6 +263,20 @@ function Dashboard({ data, refresh }: { data: Snapshot; refresh: () => Promise<v
     </aside>
     {chatOpen && <Modal title={`Chat dengan ${PETS[pet].name}`} onClose={() => setChatOpen(false)}><div className="chat-history">{data.messages.length ? data.messages.map((m) => <div key={m.id} className={`chat-row ${m.sender === "user" ? "user" : "pet"}`}><small>{m.sender === "user" ? "Kamu" : PETS[pet].name} · {new Date(m.createdAt).toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" })}</small><p>{m.message}</p></div>) : <p className="empty-state">Belum ada chat. Tanyakan pet-mu sedang apa.</p>}</div><form className="modal-chat-form" onSubmit={sendChat}><input value={input} onChange={(e) => setInput(e.target.value)} placeholder="Ketik pesan..." /><button className="primary-btn" disabled={pending}>Kirim</button></form></Modal>}
     {transportOpen && <TransportModal onClose={() => setTransportOpen(false)} onSaved={async () => { setTransportOpen(false); await refresh(); }} />}
+    {walkOpen && (
+    <WalkQuestModal
+        onClose={() => setWalkOpen(false)}
+        onSaved={async (distance, saved) => {
+            setWalkOpen(false);
+
+            setSpeech(
+                `SELAMAT! Kamu berjalan sejauh ${distance.toFixed(2)} km dan berhasil mengurangi sekitar ${saved.toFixed(3)} kg CO₂e! 🌱`
+            );
+
+            await refresh();
+        }}
+    />
+)}
   </div>;
 }
 
