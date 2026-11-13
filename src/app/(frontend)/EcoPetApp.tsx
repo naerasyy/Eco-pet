@@ -280,6 +280,277 @@ function Dashboard({ data, refresh }: { data: Snapshot; refresh: () => Promise<v
   </div>;
 }
 
+function WalkQuestModal({
+  onClose,
+  onSaved,
+}: {
+  onClose: () => void;
+  onSaved: (distance: number, saved: number) => Promise<void>;
+}) {
+  const [tracking, setTracking] = useState(false);
+  const [distance, setDistance] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [message, setMessage] = useState(
+    "Aktifkan lokasi untuk mulai menghitung perjalananmu!"
+  );
+  const [pending, setPending] = useState(false);
+
+  const [watchId, setWatchId] = useState<number | null>(null);
+
+  const startTime = React.useRef<number | null>(null);
+  const previousPosition = React.useRef<{
+    lat: number;
+    lon: number;
+    time: number;
+  } | null>(null);
+
+  const CAR_EMISSION = 0.192; // kg CO2e per km
+  const MIN_DISTANCE = 0.1; // km
+
+  // Menghitung jarak berdasarkan koordinat GPS
+  const calculateDistance = (
+    lat1: number,
+    lon1: number,
+    lat2: number,
+    lon2: number
+  ) => {
+    const R = 6371;
+
+    const toRad = (value: number) =>
+      (value * Math.PI) / 180;
+
+    const dLat = toRad(lat2 - lat1);
+    const dLon = toRad(lon2 - lon1);
+
+    const a =
+      Math.sin(dLat / 2) ** 2 +
+      Math.cos(toRad(lat1)) *
+        Math.cos(toRad(lat2)) *
+        Math.sin(dLon / 2) ** 2;
+
+    const c =
+      2 *
+      Math.atan2(
+        Math.sqrt(a),
+        Math.sqrt(1 - a)
+      );
+
+    return R * c;
+  };
+
+  // Memulai pelacakan GPS
+  const startTracking = () => {
+    if (!navigator.geolocation) {
+      setMessage("Browser tidak mendukung GPS.");
+      return;
+    }
+
+    setMessage("Meminta izin akses lokasi...");
+
+    const id = navigator.geolocation.watchPosition(
+      (position) => {
+        const { latitude, longitude, accuracy } =
+          position.coords;
+
+        // Abaikan data GPS yang kurang akurat
+        if (accuracy > 35) {
+          setMessage("Mencari sinyal GPS yang lebih akurat...");
+          return;
+        }
+
+        const now = Date.now();
+
+        const current = {
+          lat: latitude,
+          lon: longitude,
+          time: now,
+        };
+
+        if (!startTime.current) {
+          startTime.current = now;
+          setTracking(true);
+          setMessage("GPS aktif! Selamat berjalan kaki 🌿");
+        }
+
+        const previous = previousPosition.current;
+
+        if (previous) {
+          const segment = calculateDistance(
+            previous.lat,
+            previous.lon,
+            current.lat,
+            current.lon
+          );
+
+          const timeHours =
+            (now - previous.time) / 3600000;
+
+          const speed =
+            timeHours > 0 ? segment / timeHours : 0;
+
+          // Filter perubahan koordinat yang tidak wajar
+          if (
+            segment >= 0.005 &&
+            segment <= 0.15 &&
+            speed <= 8
+          ) {
+            setDistance((old) => old + segment);
+          }
+        }
+
+        previousPosition.current = current;
+
+        setDuration(
+          Math.floor((now - startTime.current) / 60000)
+        );
+      },
+      (error) => {
+        const messages: Record<number, string> = {
+          1: "Izin lokasi ditolak. Aktifkan izin lokasi di browser.",
+          2: "Lokasi tidak tersedia. Coba lagi di tempat terbuka.",
+          3: "Waktu pencarian lokasi habis. Silakan coba lagi.",
+        };
+
+        setMessage(
+          messages[error.code] || "Terjadi kesalahan GPS."
+        );
+
+        setTracking(false);
+        setWatchId(null);
+      },
+      {
+        enableHighAccuracy: true,
+        maximumAge: 0,
+        timeout: 20000,
+      }
+    );
+
+    setWatchId(id);
+  };
+
+  const stopTracking = async () => {
+    if (watchId !== null) {
+      navigator.geolocation.clearWatch(watchId);
+      setWatchId(null);
+    }
+
+    setTracking(false);
+
+    const totalDistance = distance;
+    const totalDuration = duration;
+
+    if (totalDistance < MIN_DISTANCE) {
+      setMessage(
+        "Jarak belum mencapai 0,1 km. Lanjutkan perjalananmu!"
+      );
+      return;
+    }
+
+    const emissionSaved =
+      totalDistance * CAR_EMISSION;
+
+    setPending(true);
+    setMessage("Menyimpan hasil perjalanan...");
+
+    try {
+      // Simpan ke database website
+      await appPost({
+        action: "activity",
+        title: "Jalan kaki 2.000 langkah",
+        questKey: "walk",
+        type: "transport",
+        distanceKm: Number(totalDistance.toFixed(3)),
+        durationMinutes: Math.max(1, totalDuration),
+        transportMode: "walk",
+        alternativeMode: "car",
+        visibility: "public",
+      });
+
+      setMessage("Quest berhasil diselesaikan! 🌱");
+
+      await onSaved(totalDistance, emissionSaved);
+    } catch (error) {
+      setMessage(
+        error instanceof Error
+          ? error.message
+          : "Gagal menyimpan perjalanan."
+      );
+      setTracking(false);
+    } finally {
+      setPending(false);
+    }
+  };
+
+  // Bersihkan GPS saat modal ditutup
+  useEffect(() => {
+    return () => {
+      if (watchId !== null) {
+        navigator.geolocation.clearWatch(watchId);
+      }
+    };
+  }, [watchId]);
+
+  return (
+    <Modal title="Jalan Kaki Quest 🌿" onClose={onClose}>
+      <div className="walk-gps">
+
+        <div className="walk-gps-icon">
+          <Icon name="map-pin" size={38} />
+        </div>
+
+        <h3>Let's Go Green!</h3>
+
+        <p>{message}</p>
+
+        <div className="walk-gps-stats">
+          <div>
+            <small>JARAK DITEMPUH</small>
+            <strong>{distance.toFixed(2)} km</strong>
+          </div>
+
+          <div>
+            <small>DURASI</small>
+            <strong>{duration} menit</strong>
+          </div>
+        </div>
+
+        <div className="walk-gps-emission">
+          <small>ESTIMASI EMISI DIHINDARI</small>
+          <strong>
+            {(distance * CAR_EMISSION).toFixed(3)} kg CO₂e
+          </strong>
+          <p>Dibandingkan menggunakan mobil pribadi.</p>
+        </div>
+
+        {!tracking ? (
+          <button
+            className="primary-btn full"
+            onClick={startTracking}
+            disabled={pending}
+          >
+            <Icon name="map-pin" size={17} />
+            Aktifkan Lokasi & Mulai
+          </button>
+        ) : (
+          <button
+            className="primary-btn full"
+            onClick={stopTracking}
+            disabled={pending}
+          >
+            Selesaikan Perjalanan
+          </button>
+        )}
+
+        <p className="calculation-note">
+          Pastikan izin lokasi aktif. GPS hanya digunakan
+          selama perjalanan sedang dihitung.
+        </p>
+      </div>
+    </Modal>
+  );
+}
+
+
 function TransportModal({ onClose, onSaved }: { onClose: () => void; onSaved: () => Promise<void> }) {
   const [distance, setDistance] = useState(5);
   const [duration, setDuration] = useState(25);
