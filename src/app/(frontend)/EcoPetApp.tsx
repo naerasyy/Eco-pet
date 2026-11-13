@@ -222,7 +222,6 @@ function Dashboard({ data, refresh }: { data: Snapshot; refresh: () => Promise<v
   const done = data.activities.filter((a) => new Date(a.createdAt).toDateString() === today).map((a) => a.questKey);
   const savedToday = data.activities.filter((a) => new Date(a.createdAt).toDateString() === today).reduce((sum, a) => sum + Number(a.avoidedEmissionsKg || 0), 0);
   const complete = async (quest: typeof QUESTS[number]) => {
-  const complete = async (quest: typeof QUESTS[number]) => {
     if (done.includes(quest.key)) return;
     if (quest.key === "walk") {
         setWalkOpen(true);
