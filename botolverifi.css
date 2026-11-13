@@ -1,0 +1,48 @@
+.bottle-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.bottle-card {
+  background: #fff;
+  padding: 24px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 380px;
+  text-align: center;
+  color: #333;
+}
+
+.bottle-card video,
+.bottle-card img {
+  width: 100%;
+  max-height: 250px;
+  object-fit: contain;
+  border-radius: 12px;
+  margin: 12px 0;
+}
+
+.bottle-card button {
+  padding: 12px 18px;
+  margin: 5px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: #65a86b;
+  color: white;
+  font-weight: bold;
+}
+
+.bottle-card button:hover {
+  opacity: 0.85;
+}
+
+#status {
+  font-size: 14px;
+  margin: 12px 0;
+}
