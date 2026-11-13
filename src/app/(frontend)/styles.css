@@ -128,3 +128,88 @@ input:focus { border-color: var(--green); box-shadow: 3px 3px 0 #c6d9c7; }
   .simple-header{padding:0 18px}.pet-grid{grid-template-columns:1fr 1fr;gap:10px}.onboard-card{padding-left:16px;padding-right:16px}.pixel-pet.small{height:90px}
   .welcome-row{align-items:start}.streak-chip{font-size:10px}.welcome-row h1{font-size:20px}.top-stats{grid-template-columns:1fr 1fr}.top-stats .profile-chip{grid-column:1/-1}.stat-pill{padding:11px!important}.stat-pill b{font-size:12px}.dashboard-grid{display:block}.pet-card{margin-bottom:18px}.right-stack{grid-template-columns:1fr}.habitat{min-height:420px}.speech{top:65px;font-size:11px;max-width:80%}.tree.t2{display:none}.pixel-pet.large{width:190px;height:160px}.habitat-top{align-items:flex-start;gap:8px}.habitat-actions button{font-size:0}.habitat-actions svg{width:17px}.page-heading{display:block}.page-heading .outline-btn,.social-tabs{margin-top:18px}.report-grid{display:block}.impact-card{margin-top:18px}.mini-stats div{padding-left:7px}.mini-stats b{font-size:12px}.diary-grid{grid-template-columns:1fr}.challenge-banner{grid-template-columns:1fr;padding:20px}.banner-bottle{display:none}.shop-heading{display:block}.filter-chips{margin-top:15px;overflow:auto}.shop-grid{grid-template-columns:1fr}.item-art{height:145px}.token-hero{grid-template-columns:1fr auto;padding:22px}.token-history{grid-column:1/-1;border:0;border-top:1px solid #64907b;padding:14px 0 0}.token-hero h1{font-size:37px}.coin-stack{width:80px;height:80px}.world-heading{padding-inline:20px}.world-map{transform:none;width:100%;margin:0;height:auto;padding:25px 20px}.map-path{left:50%;top:10%;bottom:10%;width:4px;height:auto;border-top:0;border-left:4px dashed #e9db8b;transform:none}.region{position:relative!important;left:auto!important;right:auto!important;top:auto!important;display:flex;align-items:center;gap:12px;margin:0 0 24px;width:100%}.region:nth-child(even){flex-direction:row-reverse}.region-island{width:120px;flex:0 0 120px}.region-label{flex:1;margin:0}.level-perks{padding-bottom:70px}.perk-track{margin:0 20px}.milestone b{display:none}.modal-backdrop{padding:10px}.modal-body{padding:14px}.closet-preview{display:block;text-align:center}.closet-preview .pixel-pet{width:150px}.closet-grid{grid-template-columns:1fr 1fr}.people-head{display:block}.people-head input{width:100%;margin-top:15px}.people-grid{grid-template-columns:1fr}.journey-strip{grid-template-columns:1fr 1fr;padding:18px 12px}.journey-strip>div:first-child{grid-column:1/-1}.journey-stop{margin-bottom:12px}.journey-stop::before{display:none}.lesson-grid{grid-template-columns:1fr}.region-adventure{grid-template-columns:1fr}.adventure-scene{min-height:220px}.eco-class{padding:25px 18px 80px}
 }
+
+.walk-gps {
+  text-align: center;
+}
+
+.walk-gps-icon {
+  width: 85px;
+  height: 85px;
+  margin: 5px auto 18px;
+  display: grid;
+  place-items: center;
+  background: #dcebc8;
+  border: 3px solid var(--ink);
+  box-shadow: 5px 5px 0 var(--ink);
+  color: var(--green);
+}
+
+.walk-gps h3 {
+  font: 700 17px var(--pixel);
+  margin-bottom: 10px;
+}
+
+.walk-gps > p {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+.walk-gps-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.walk-gps-stats > div {
+  padding: 17px 10px;
+  background: #edf3df;
+  border: 2px solid var(--ink);
+}
+
+.walk-gps-stats small,
+.walk-gps-stats strong {
+  display: block;
+}
+
+.walk-gps-stats small {
+  font: 700 7px var(--pixel);
+  margin-bottom: 9px;
+  color: var(--green);
+}
+
+.walk-gps-stats strong {
+  font: 700 19px var(--pixel);
+}
+
+.walk-gps-emission {
+  padding: 17px;
+  margin-bottom: 18px;
+  background: #dceba2;
+  border: 2px solid var(--ink);
+}
+
+.walk-gps-emission small,
+.walk-gps-emission strong {
+  display: block;
+}
+
+.walk-gps-emission small {
+  font: 700 8px var(--pixel);
+  margin-bottom: 10px;
+}
+
+.walk-gps-emission strong {
+  font: 700 22px var(--pixel);
+  color: var(--green);
+}
+
+.walk-gps-emission p {
+  font-size: 10px;
+  margin-top: 8px;
+  color: var(--muted);
+}
+
