@@ -222,8 +222,16 @@ function Dashboard({ data, refresh }: { data: Snapshot; refresh: () => Promise<v
   const done = data.activities.filter((a) => new Date(a.createdAt).toDateString() === today).map((a) => a.questKey);
   const savedToday = data.activities.filter((a) => new Date(a.createdAt).toDateString() === today).reduce((sum, a) => sum + Number(a.avoidedEmissionsKg || 0), 0);
   const complete = async (quest: typeof QUESTS[number]) => {
+  const complete = async (quest: typeof QUESTS[number]) => {
     if (done.includes(quest.key)) return;
-    if (quest.type === "transport") { setTransportOpen(true); return; }
+    if (quest.key === "walk") {
+        setWalkOpen(true);
+        return;
+    }
+    if (quest.type === "transport") {
+        setTransportOpen(true);
+        return;
+    }
     setPending(true);
     try { await appPost({ action: "activity", title: quest.title, questKey: quest.key, type: quest.type, visibility: "public" }); setSpeech("Quest tercatat di akunmu. Habitatku terasa lebih sehat!"); await refresh(); } finally { setPending(false); }
   };
