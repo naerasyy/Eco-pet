@@ -1,7 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { FormEvent, ReactNode, useEffect, useMemo, useState } from "react";
+import {
+  FormEvent,
+  ReactNode,
+  useEffect,
+  useMemo,
+  useState,
+  useRef,
+} from "react";
 
 type PetKey = "turtle" | "rabbit" | "cat" | "snake";
 type ViewKey = "home" | "report" | "social" | "token" | "world";
