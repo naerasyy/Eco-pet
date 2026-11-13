@@ -215,6 +215,7 @@ function Dashboard({ data, refresh }: { data: Snapshot; refresh: () => Promise<v
   const [speech, setSpeech] = useState(data.messages.at(-1)?.message || `Halo! Aku ${PETS[pet].name}.`);
   const [chatOpen, setChatOpen] = useState(false);
   const [transportOpen, setTransportOpen] = useState(false);
+  const [walkOpen, setWalkOpen] = useState(false);
   const [petPosition, setPetPosition] = useState({ x: 50, y: 66 });
   const [pending, setPending] = useState(false);
   const today = new Date().toDateString();
