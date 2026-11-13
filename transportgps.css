@@ -1,0 +1,60 @@
+.transit-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.65);
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.transit-modal.active {
+  display: flex;
+}
+
+.transit-card {
+  width: 100%;
+  max-width: 350px;
+  padding: 24px;
+  background: #e5f5d5;
+  border: 4px solid #426b38;
+  border-radius: 16px;
+  text-align: center;
+  color: #294b2b;
+  box-shadow: 0 8px 0 #294b2b;
+}
+
+.transit-card h2 {
+  margin-top: 0;
+}
+
+.transit-card p {
+  line-height: 1.5;
+}
+
+#distanceInfo {
+  margin: 18px 0;
+  font-weight: bold;
+}
+
+.transit-card button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: 2px solid #426b38;
+  border-radius: 10px;
+  background: #8bcf70;
+  color: #173d20;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.transit-card button:hover {
+  background: #a8e58d;
+}
+
+#closeTransit {
+  background: #d5e2ca;
+}
